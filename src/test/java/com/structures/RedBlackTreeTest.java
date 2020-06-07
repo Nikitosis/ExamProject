@@ -64,7 +64,6 @@ public class RedBlackTreeTest {
         for (int v : values) {
             rbTree.insert(v);
         }
-
         Iterator iterator = rbTree.iterator();
 
         assertEquals(1, iterator.next());

@@ -1,8 +1,11 @@
 import com.algorithms.AlgorithmFactory;
 import com.structures.CircularList;
 import com.structures.Iterator;
+import com.tracking.Tracker;
 
+import java.util.ArrayList;
 import java.util.Comparator;
+import java.util.List;
 
 public class Main {
     public static void main(String[] args) {
@@ -45,8 +48,15 @@ public class Main {
                 return 1;
             }
         };
-        list.sort(AlgorithmFactory.selectionSort(Integer.class), comparator);
-
+        Tracker.trackMemory(
+                () -> {
+                    list.sort(AlgorithmFactory.selectionSort(Integer.class), comparator);
+//                    List<Integer> l = new ArrayList<>();
+//                    for(int i=0;i<10000;i++) {
+//                        l.add(i);
+//                    }
+                }
+        );
         Iterator iterator = list.iterator();
         for(int i=0;i<3;i++) {
             System.out.println(iterator.get());
