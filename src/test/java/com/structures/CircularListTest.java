@@ -1,6 +1,5 @@
 package com.structures;
 
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -59,7 +58,7 @@ public class CircularListTest {
         list.addLast(12);
         list.addLast(13);
 
-        ListIterator<Integer> iterator = list.iterator();
+        Iterator<Integer> iterator = list.iterator();
         assertEquals(10, iterator.get());
     }
 
@@ -70,7 +69,7 @@ public class CircularListTest {
         list.addLast(11);
         list.addLast(12);
 
-        ListIterator<Integer> iterator = list.iterator();
+        Iterator<Integer> iterator = list.iterator();
         assertEquals(10, iterator.get());
         iterator.next();
         assertEquals(11, iterator.get());

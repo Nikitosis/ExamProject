@@ -1,10 +1,10 @@
 package com.structures;
 
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.LinkedList;
+import com.algorithms.SortingAlgorithm;
 
-public class CircularList <T>{
+import java.util.Comparator;
+
+public class CircularList <T> implements List<T>, Iterable<T>{
     private class Node <T>{
         public Node nextNode;
         public Node prevNode;
@@ -17,7 +17,7 @@ public class CircularList <T>{
         }
     }
 
-    private class CLIterator implements ListIterator<T> {
+    private class CLIterator implements Iterator<T> {
         private Node<T> curNode;
 
         CLIterator(int index) {
@@ -111,7 +111,7 @@ public class CircularList <T>{
         return curNode;
     }
 
-    public ListIterator<T> iterator() {
+    public Iterator<T> iterator() {
         return new CLIterator(0);
     }
 
@@ -188,5 +188,28 @@ public class CircularList <T>{
 
     public int size() {
         return size;
+    }
+
+    @Override
+    public T[] toArray() {
+        Iterator<T> iterator = this.iterator();
+        T[] arr =  (T[]) new Object[size];
+        for(int i=0; i<size; i++) {
+            arr[i] = iterator.get();
+            iterator.next();
+        }
+
+        return  arr;
+    }
+
+    @Override
+    public void sort(SortingAlgorithm<T> sortingAlgorithm, Comparator<T> comparator) {
+        T[] arr = this.toArray();
+        sortingAlgorithm.sort(arr, size, comparator);
+        Iterator<T> iterator = this.iterator();
+        for(T obj: arr) {
+            iterator.set(obj);
+            iterator.next();
+        }
     }
 }

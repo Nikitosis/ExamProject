@@ -1,11 +1,8 @@
-import com.model.Employee;
-import com.model.Ministry;
-import com.model.Organization;
-import com.model.Unit;
+import com.algorithms.AlgorithmFactory;
 import com.structures.CircularList;
-import com.structures.ListIterator;
+import com.structures.Iterator;
 
-import java.util.Arrays;
+import java.util.Comparator;
 
 public class Main {
     public static void main(String[] args) {
@@ -34,24 +31,27 @@ public class Main {
 //                .build();
 //
 //        System.out.println(economyMinistry.toJson());
-
         CircularList<Integer> list = new CircularList<>();
-        list.addFirst(1);
-        list.addLast(2);
+        list.addFirst(5);
+        list.addLast(10);
         list.addLast(3);
 
-        ListIterator iterator = list.iterator();
-        for(int i=0;i<4;i++) {
+        Comparator<Integer> comparator = (a,b)->{
+            if(a<b){
+                return -1;
+            } else if(a.equals(b)) {
+                return 0;
+            } else {
+                return 1;
+            }
+        };
+        list.sort(AlgorithmFactory.selectionSort(Integer.class), comparator);
+
+        Iterator iterator = list.iterator();
+        for(int i=0;i<3;i++) {
             System.out.println(iterator.get());
             iterator.next();
         }
-
-        System.out.println("del");
-        System.out.println(iterator.get());
-
-        iterator.remove();
-
-        System.out.println(iterator.get());
 
     }
 }
