@@ -1,18 +1,16 @@
 package com.structures;
 
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 import java.util.LinkedList;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNull;
-import static org.junit.jupiter.api.Assertions.assertThrows;
 
-public class SPHashTableTest {
+class QPHashTableTest {
     @Test
     void test() {
-        HashTable<String, String> hashTable = new SPHashTable<String, String>();
+        HashTable<String, String> hashTable = new QPHashTable<String, String>();
         assertNull(hashTable.get("any"));
         hashTable.put("one", "Guccia");
         hashTable.put("two", "Muccia");
@@ -25,8 +23,8 @@ public class SPHashTableTest {
     }
 
     @Test
-    void testCustomCollection() {
-        HashTable<String, String> hashTable = new SPHashTable<String, String>(64, LinkedList.class);
+    void testCustomSize() {
+        HashTable<String, String> hashTable = new QPHashTable<>(10);
         assertNull(hashTable.get("any"));
         hashTable.put("one", "Guccia");
         hashTable.put("two", "Muccia");

@@ -21,13 +21,16 @@ public class SPHashTable<K, V> implements HashTable<K, V> {
     private List<Collection<Node>> buckets;
 
     public SPHashTable(int size, Class collectionClass) {
-        if(collectionClass == ArrayList.class) {
-            childCollectionCreator = ArrayList::new;
-        } else if (collectionClass == LinkedList.class) {
-            childCollectionCreator = LinkedList::new;
-        } else {
-            this.childCollectionCreator = ArrayList::new;
-        }
+        childCollectionCreator = () -> {
+            try {
+                return (Collection<Node>)collectionClass.newInstance();
+            } catch (InstantiationException e) {
+                e.printStackTrace();
+            } catch (IllegalAccessException e) {
+                e.printStackTrace();
+            }
+            return new ArrayList<>();
+        };
         initBucketsList(size);
     }
 
@@ -80,6 +83,17 @@ public class SPHashTable<K, V> implements HashTable<K, V> {
         } else {
             return (V)foundNode.val;
         }
+    }
+
+    @Override
+    public List<K> getAllKeys() {
+        List<K> res = new ArrayList<>();
+        for(Collection<Node> innerList: buckets) {
+            for(Node node:innerList) {
+                res.add((K)node.key);
+            }
+        }
+        return res;
     }
 
     private Node getNode(K key) {
