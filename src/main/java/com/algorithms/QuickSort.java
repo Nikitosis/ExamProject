@@ -22,7 +22,7 @@ public class QuickSort<T> implements SortingAlgorithm<T> {
 
         int smallerIndex = low - 1;
 
-        for(int i=low;i<high-1;i++) {
+        for(int i=low;i<=high-1;i++) {
             if(comparator.compare(arr[i], pivot) < 0) {
                 smallerIndex++;
                 T temp = arr[smallerIndex];

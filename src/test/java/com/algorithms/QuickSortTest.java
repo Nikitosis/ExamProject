@@ -12,9 +12,9 @@ public class QuickSortTest {
     @Test
     public void test() {
         CircularList<Integer> list = new CircularList<>();
+        list.addLast(3);
         list.addFirst(5);
         list.addLast(10);
-        list.addLast(3);
 
         Comparator<Integer> comparator = (a, b)->{
             if(a<b){

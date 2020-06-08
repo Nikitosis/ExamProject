@@ -1,6 +1,11 @@
 package com.structures;
 
+import com.algorithms.AlgorithmFactory;
+import com.model.Employee;
+import com.model.TestData;
 import org.junit.jupiter.api.Test;
+
+import java.util.Comparator;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -77,5 +82,23 @@ public class CircularListTest {
         assertEquals(12, iterator.get());
         iterator.next();
         assertEquals(10, iterator.get());
+    }
+
+    @Test
+    void modelTest() {
+        CircularList<Employee> list = new CircularList<>();
+        list.addLast(TestData.getEmployee("Cegiy","bbb"));
+        list.addLast(TestData.getEmployee("Agentiy","aaa"));
+        list.addLast(TestData.getEmployee("Begiy","bbb"));
+
+        list.sort(AlgorithmFactory.selectionSort(Employee.class), Comparator.comparing(Employee::getName));
+
+        Iterator<Employee> iterator = list.iterator();
+
+        assertEquals("Agentiy", iterator.get().getName());
+        iterator.next();
+        assertEquals("Begiy", iterator.get().getName());
+        iterator.next();
+        assertEquals("Cegiy", iterator.get().getName());
     }
 }
